@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateUsers1635193869178 implements MigrationInterface {
+export class CreateAlias1635253579297 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'user',
+        name: 'alias',
         columns: [
           {
             name: 'id',
@@ -16,35 +16,14 @@ export class CreateUsers1635193869178 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'email',
-            type: 'varchar'
+            name: 'userId',
+            type: 'uuid'
           },
           {
-            name: 'password',
-            type: 'varchar'
+            name: 'categoryId',
+            type: 'uuid'
           },
-          {
-            name: 'cpf',
-            type: 'varchar'
-          },
-          {
-            name: 'phone',
-            type: 'varchar'
-          },
-          {
-            name: 'cellphone',
-            type: 'varchar'
-          },
-          {
-            name: 'admin',
-            type: 'boolean',
-            default: false
-          },
-          {
-            name: 'active',
-            type: 'boolean',
-            default: true
-          },
+
           {
             name: 'created_at',
             type: 'timestamp',
@@ -55,12 +34,27 @@ export class CreateUsers1635193869178 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()'
           }
-        ]
+        ],
+        foreignKeys: [{
+          name: 'FKUserAlias',
+          referencedTableName: 'user',
+          referencedColumnNames: ['id'],
+          columnNames: ['userId'],
+          onUpdate: 'SET NULL',
+          onDelete: 'SET NULL'
+        }, {
+          name: 'FKCategoryAlias',
+          referencedTableName: 'category',
+          referencedColumnNames: ['id'],
+          columnNames: ['categoryId'],
+          onUpdate: 'SET NULL',
+          onDelete: 'SET NULL'
+        }]
       })
     )
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user')
+    await queryRunner.dropTable('alias')
   }
 }
