@@ -4,12 +4,13 @@
   "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/main",
+    "start": "ts-node-dev dist/main/server.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "build": "rimraf dist && tsc",
     "prepare": "husky install",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "postdev": "rm src/database/test.sqlite"
   },
   "repository": {
     "type": "git",
@@ -41,9 +42,9 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "celebrate": "^15.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "module-alias": "^2.2.2",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
