@@ -4,10 +4,10 @@ import { badRequest } from '@/errors'
 import { hash } from 'bcrypt'
 import { User } from '@/entities'
 
-export class UserService {
+export class CreateUserService {
   constructor (private readonly userRepository: UserRepository) {}
 
-  async create ({
+  async execute ({
     name,
     email,
     password,
