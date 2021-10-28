@@ -9,6 +9,27 @@ export interface UserParams {
   active: boolean
 }
 
+export interface CompanyParams {
+  name: string
+  phone?: string
+  cep?: string
+  address?: string
+  number?: string
+  complement?: string
+  neighborhood?: string
+  city?: string
+  state?: string
+  latitude?: string
+  longitude?: string
+  description?: string
+  priority?: boolean
+  facebook?: string
+  instagram?: string
+  active?: boolean
+  cpfCnpj: string
+  userId: string
+}
+
 export interface PageLinks {
   first?: string
   prev?: string
