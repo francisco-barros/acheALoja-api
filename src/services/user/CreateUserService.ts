@@ -1,8 +1,8 @@
-import { UserRepository } from '@/repositories'
-import { UserParams } from '@/types'
-import { badRequest } from '@/errors'
+import { UserRepository } from '../../repositories'
+import { UserParams } from '../../types'
+import { badRequest } from '../../errors'
 import { hash } from 'bcrypt'
-import { User } from '@/entities'
+import { User } from '../../entities/User'
 
 export class CreateUserService {
   constructor (private readonly userRepository: UserRepository) {}
@@ -17,7 +17,7 @@ export class CreateUserService {
     admin = false,
     active = true
   }: UserParams): Promise<User | Error> {
-    if ((await this.userRepository.findOne({ cpf })) != null) {
+    if ((await this.userRepository.findOne({ email })) != null) {
       return badRequest('User already exists')
     }
 
