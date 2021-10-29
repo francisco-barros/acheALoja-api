@@ -10,6 +10,6 @@ const app = express()
 
 app.use(express.json())
 app.use(routeAlias)
-app.use('v1/', routes)
+app.use('/', routes)
 
 export { app }

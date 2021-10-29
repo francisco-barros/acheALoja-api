@@ -21,10 +21,19 @@ export class CreateUserService {
       return badRequest('User already exists')
     }
 
+    let hashedPassword = ''
+
+    try {
+      hashedPassword = await hash(password, 8)
+    } catch (error) {
+      console.log('error', error)
+      console.log('password', password)
+    }
+
     const user = this.userRepository.create({
       name,
       email,
-      password: await hash(password, 8),
+      password: hashedPassword,
       cpf,
       phone,
       cellphone,
