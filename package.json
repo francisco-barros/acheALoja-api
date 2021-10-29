@@ -4,7 +4,7 @@
   "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev dist/main/server.js",
+    "start:dev": "ts-node-dev src/main/server.ts",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "build": "rimraf dist && tsc",
@@ -52,7 +52,6 @@
     "rimraf": "^3.0.2",
     "sqlite3": "^5.0.2",
     "typeorm": "^0.2.38",
-    "uuid": "^8.3.2",
-    "validate-cpf-joi": "0.0.8"
+    "uuid": "^8.3.2"
   }
 }
