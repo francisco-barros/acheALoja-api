@@ -26,7 +26,6 @@ export class AuthenticateUserService {
         expiresIn: process.env.JWT_EXPIRATION_TIME!,
         subject: user.id
       })
-    console.log('token: ', token)
     return token
   }
 }

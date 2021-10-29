@@ -17,10 +17,8 @@ export class AuthenticateUserController {
         email,
         password
       })
-      console.log('rota deu bom')
       return response.status(HttpStatusCode.OK).json({ access_token: accessToken })
     } catch (error) {
-      console.log('rota deu ruim')
       return response.status(HttpStatusCode.unauthorized).json({ error: 'User Unauthorized' })
     }
   }
