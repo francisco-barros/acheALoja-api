@@ -1,6 +1,6 @@
 import { UserRepository } from '../../repositories'
 import { UserParams } from '../../types'
-import { badRequest } from '../../errors'
+import { badRequest, serverError } from '../../errors'
 import { hash } from 'bcrypt'
 import { User } from '../../entities/User'
 
@@ -26,8 +26,7 @@ export class CreateUserService {
     try {
       hashedPassword = await hash(password, 8)
     } catch (error) {
-      console.log('error', error)
-      console.log('password', password)
+      return serverError('An error occured, please try again later')
     }
 
     const user = this.userRepository.create({

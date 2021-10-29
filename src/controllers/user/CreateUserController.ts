@@ -12,16 +12,21 @@ export class CreateUserController {
     const userRepository = getCustomRepository(UserRepository)
     const createUserService = new CreateUserService(userRepository)
 
-    const user = await createUserService.execute({
-      name,
-      email,
-      password,
-      cpf,
-      phone,
-      cellphone,
-      admin,
-      active
-    })
-    return response.status(HttpStatusCode.created).json(user)
+    try {
+      const user = await createUserService.execute({
+        name,
+        email,
+        password,
+        cpf,
+        phone,
+        cellphone,
+        admin,
+        active
+      })
+
+      return response.status(HttpStatusCode.created).json(user)
+    } catch (error) {
+      return response.status(HttpStatusCode.serverError).json({ error: 'An error occured please try again later' })
+    }
   }
 }

@@ -30,11 +30,20 @@ export interface CompanyParams {
   userId: string
 }
 
+export interface AuthenticationParams {
+  email: string
+  password: string
+}
+
 export interface PageLinks {
   first?: string
   prev?: string
   next?: string
   last?: string
+}
+
+export interface JwtPayload {
+  sub: string
 }
 
 export enum HttpStatusCode {
