@@ -1,10 +1,10 @@
-import { CompanyRepository } from '../../repositories'
+import { CompanyRepository, UserRepository } from '../../repositories'
 import { CompanyParams } from '../../types'
-import { badRequest } from '../../errors'
+import { badRequest, forbidden } from '../../errors'
 import { Company } from '../../entities/Company'
 
 export class CreateCompanyService {
-  constructor (private readonly companyRepository: CompanyRepository) {}
+  constructor (private readonly companyRepository: CompanyRepository, private readonly userRepository: UserRepository) {}
 
   async execute ({
     name,
@@ -28,6 +28,12 @@ export class CreateCompanyService {
   }: CompanyParams): Promise<Company | Error> {
     if ((await this.companyRepository.findOne({ cpfCnpj })) != null) {
       return badRequest('Company already exists')
+    }
+
+    const user = await this.userRepository.findOne({ id: userId })
+
+    if (user === null || user === undefined || !user.admin || !user.active) {
+      return forbidden('User cannot create a company')
     }
 
     const company = this.companyRepository.create({
