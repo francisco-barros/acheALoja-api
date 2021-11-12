@@ -30,6 +30,11 @@ export interface CompanyParams {
   userId: string
 }
 
+export interface CategoryParams {
+  name: string
+  userId: string
+}
+
 export interface AuthenticationParams {
   email: string
   password: string
